@@ -3,10 +3,11 @@ import numpy as np
 def sigmoid(x):
     """
     Compute the sigmoid function for the input here.
+    Sigmoid takes an input and squishes it between [0,1s]
     """
     
     ### YOUR CODE HERE
-    raise NotImplementedError
+    x = 1.0/(1+np.exp(-x))
     ### END YOUR CODE
     
     return x
@@ -19,7 +20,7 @@ def sigmoid_grad(f):
     """
     
     ### YOUR CODE HERE
-    raise NotImplementedError
+    f = f * (np.ones_like(f) - f)
     ### END YOUR CODE
     
     return f
@@ -34,6 +35,7 @@ def test_sigmoid_basic():
     f = sigmoid(x)
     g = sigmoid_grad(f)
     print f
+    # print g
     assert np.amax(f - np.array([[0.73105858, 0.88079708], 
         [0.26894142, 0.11920292]])) <= 1e-6
     print g
@@ -50,9 +52,8 @@ def test_sigmoid():
     """
     print "Running your tests..."
     ### YOUR CODE HERE
-    raise NotImplementedError
     ### END YOUR CODE
 
 if __name__ == "__main__":
     test_sigmoid_basic();
-    test_sigmoid()
+    #test_sigmoid()
