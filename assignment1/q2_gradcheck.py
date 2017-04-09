@@ -26,11 +26,14 @@ def gradcheck_naive(f, x):
         # print f(x+h)[0]
         # print x
         # x[ix] = (f(x+h)[0] - f(x)[0]) / h
+        xx = x[ix]
+        x[ix] = xx + h
         random.setstate(rndstate)
-        a = f(x[ix]+h)[0]
+        fa = f(x)[0]
+        x[ix] = xx - h
         random.setstate(rndstate)
-        b = f(x[ix]-h)[0]
-        numgrad = (a - b) / (2* h)
+        fb = f(x)[0]
+        numgrad = (fa - fb) / (2* h)
         ### END YOUR CODE
 
         # Compare gradients

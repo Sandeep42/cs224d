@@ -28,10 +28,17 @@ def forward_backward_prop(data, labels, params, dimensions):
     ### YOUR CODE HERE: forward propagation
     h = sigmoid(data.dot(W1) + b1)
     y_pred = softmax(h.dot(W2) + b2)
-    loss = -np.sum( labels * np.log(y_pred) )
+    # print y_pred
+    cost = -np.sum( labels * np.log(y_pred) )
     ### END YOUR CODE
 
     ### YOUR CODE HERE: backward propagation
+    grad_ce = y_pred - labels
+    gradW2 = h.T.dot(grad_ce)
+    gradb2 = np.sum(grad_ce, axis=0)
+    xx = grad_ce.dot(W2.T) * sigmoid_grad(h)
+    gradW1 = data.T.dot(xx)
+    gradb1 = np.sum(xx, axis=0)
     
     ### END YOUR CODE
 
@@ -70,7 +77,7 @@ def your_sanity_checks():
     """
     print "Running your sanity checks..."
     ### YOUR CODE HERE
-    raise NotImplementedError
+    pass
     ### END YOUR CODE
 
 if __name__ == "__main__":

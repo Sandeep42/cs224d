@@ -21,9 +21,11 @@ def softmax(x):
     """
 
     ### YOUR CODE HERE
-    raise NotImplementedError
+    log_c = np.max(x, axis=x.ndim - 1, keepdims=True)
+    #for numerical stability
+    y = np.sum(np.exp(x - log_c), axis=x.ndim - 1, keepdims=True)
+    x = np.exp(x - log_c)/y
     ### END YOUR CODE
-    
     return x
 
 def test_softmax_basic():
